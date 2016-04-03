@@ -13,17 +13,22 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'devise'
+gem 'high_voltage'
 
 
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
-  gem 'web-console'
   gem 'spring'
   gem 'quiet_assets'
   gem 'better_errors'
   gem 'pry-rails'
   gem 'pry-rescue'
+end
+
+group :development do
+  gem 'web-console'
 end
 
 group :test do
