@@ -1,0 +1,83 @@
+.styleguide-section {
+  margin-bottom: 20px;
+}
+
+.styleguide-subsection {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  border-bottom: 2px solid $gray4;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.section-subtitle {
+  margin: 15px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.swatch {
+  height: 100px;
+}
+
+.brand-orange {
+  background-color: $brand-primary;
+}
+
+.brand-blue {
+  background-color: $brand-default;
+}
+
+.brand-cyan {
+  background-color: $brand-secondary;
+}
+
+.gray1 {
+  background-color: $gray1;
+}
+
+.gray2 {
+  background-color: $gray2;
+}
+
+.gray3 {
+  background-color: $gray3;
+}
+
+.gray4 {
+  background-color: $gray4;
+}
+
+.red {
+  background-color: $red;
+}
+
+.green {
+  background-color: $green;
+}
+
+.hyperlink {
+  background-color: $hyperlink;
+}
+
+.example-html {
+  background-color: $gray4;
+  border: 1px solid $gray3;
+  margin: 10px 0 30px;
+  padding: 20px;
+  position: relative;
+  border-radius: 4px;
+
+  &::before {
+    content: "\f121";
+    font-family: 'FontAwesome';
+    position: absolute;
+    color: $gray3;
+    font-size: 20px;
+    top: 10px;
+    left: 20px;
+  }
+}

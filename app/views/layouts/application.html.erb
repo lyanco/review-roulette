@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Review Roulette</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "Review Roulette" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Rails Devise Pundit" %>">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
-  <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-  <% end %>
-
-  <%= yield %>
-  <%= debug(params) if Rails.env.development? %>
-</div>
-
+<header>
+  <%= render 'layouts/navigation' %>
+</header>
+<main role="main">
+  <div class="container">
+    <%= render 'layouts/messages' %>
+    <%= yield %>
+    <%= debug(params) if Rails.env.development? %>
+  </div>
+</main>
 </body>
 </html>

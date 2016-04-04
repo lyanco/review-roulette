@@ -1,0 +1,81 @@
+html, body {
+	font-size: 14px;
+	color: $gray1;
+	font-family: sans-serif;
+	font-weight: 300;
+	line-height: 1.3rem;
+}
+
+h1,
+.h1 {
+	font-size: 28px;
+	color: $brand-default;
+	line-height: 3rem;
+}
+
+h2,
+.h2 {
+	font-size: 24px;
+	color: $brand-default;
+	line-height: 2.5rem;
+}
+
+h3,
+.h3 {
+	font-size: 20px;
+	line-height: 2rem;
+}
+
+h4, 
+h5,
+.h4,
+.h5 {
+	font-size: 16px;
+	line-height: 1.3rem;
+}
+
+p {
+	font-size: 14px;
+	color: $gray1;
+}
+
+// Font Weights
+.type-bold {
+	font-weight: 700;
+}
+
+.type-light {
+	font-weight: 300;
+}
+
+// Font Alignment
+.type-c {
+	text-align: center;
+}
+
+.type-l {
+	text-align: left;
+}
+
+.type-r	{
+	text-align: right;
+}
+
+
+// Font Colors
+
+.type-info {
+	color: $brand-default;
+}
+
+.type-gray {
+	color: $gray2;
+}
+
+.type-white {
+	color: $white;
+}
+
+.text-highlight {
+	color: $brand-default;
+}
