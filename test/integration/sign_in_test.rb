@@ -4,14 +4,7 @@ include Warden::Test::Helpers
 Warden.test_mode!
 
 class SignInTest < ActionDispatch::IntegrationTest
-
-  def setup
-    @user = users(:lee)
+  def test_sanity
+    #flunk "Need real tests"
   end
-
-  def teardown
-    Warden.test_reset!
-  end
-
-
 end
