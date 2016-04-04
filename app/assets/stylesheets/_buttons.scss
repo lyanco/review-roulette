@@ -1,0 +1,59 @@
+//Primary Buttons 
+.btn-primary,
+a.btn-primary {
+	background-color: $brand-primary;
+	border-radius: 5px;
+	border: none;
+	box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.5);
+	&:hover, &:active:focus, &:focus {
+		background-color: lighten($brand-primary, 5%);
+	}
+}
+
+.btn-primary[disabled],
+a.btn-primary[disabled] {
+	background-color: $gray3;
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: $gray2;
+    &:hover {
+    	background-color: $gray3;
+    }
+}
+
+.btn-default,
+a.btn-default {
+	background-color: $gray4;
+	color: $gray1;
+	box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.5); 
+}
+
+.btn-undo,
+a.btn-undo {
+	background-color: transparent;
+	color: $gray1; 
+}
+
+.btn-option, 
+a.btn-option {
+	background-color: none;
+	color: $brand-default;
+	&:hover, &:active:focus, &:focus {
+		color: $brand-secondary;
+		text-decoration: underline;
+	} 
+	font-size: 16px;
+}
+
+.btn-tertiary,
+a.btn-tertiary {
+	background-color: $brand-secondary;
+	color: $white;
+	box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.5);
+	&:hover, &:active:focus, &:focus {
+		background-color: lighten($brand-secondary, 5%);
+		color: $white;
+	}
+}

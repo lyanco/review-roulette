@@ -1,0 +1,19 @@
+.navbar {
+	border: none;
+	border-radius: 0px;
+	margin-bottom: 0px;
+}
+
+.navbar-default {
+	background-color: $brand-default;
+
+	.navbar-brand {
+		color: $white;
+		 &:hover {
+		 	color: $white;
+		 }
+	}
+	.navbar-text {
+		color: $white;
+	}
+}
