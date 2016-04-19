@@ -37,12 +37,33 @@ class UserEntryTest < ActionDispatch::IntegrationTest
     post entries_path, entry: { content: content }
 
     get entries_path
-    puts response.body
     @user.entries.each do |entry|
       assert_select 'a[href=?]', entry_path(entry)
     end
     assert_select 'a[href=?]', entry_path(@notleeentry), count: 0
+  end
 
+  test 'should be able to edit your own entry and not others' do
+    login_as @user
+    get entries_path
+
+    @user.entries.each do |entry|
+      assert_select 'a[href=?]', edit_entry_path(entry)
+    end
+    assert_select 'a[href=?]', edit_entry_path(@notleeentry), count: 0
+
+    get entry_path(@entry)
+    assert_select 'a[href=?]', edit_entry_path(@entry)
+    get edit_entry_path(@entry)
+    content = 'this is edited content'
+    patch entry_path(@entry), entry: { content: content }
+    assert_redirected_to @entry
+    follow_redirect!
+    assert_match content, response.body
+
+    get edit_entry_path(@notleeentry)
+    patch entry_path(@notleeentry), entry: { content: content }
+    assert_not_equal @notleeentry.content, content
 
   end
 

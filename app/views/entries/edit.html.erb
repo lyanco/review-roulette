@@ -1,0 +1,4 @@
+<%= simple_form_for @entry do |f| %>
+    <%= f.input :content, label: 'Your Entry', value: @entry.content %>
+    <%= f.button :submit %>
+<% end %>

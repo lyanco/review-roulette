@@ -45,6 +45,16 @@ class PostEntryTest < Capybara::Rails::TestCase
     assert_content page, 'Hey whats up guys im a post'
     assert_no_content page, 'hi this is my entry!!!'
 
+    #When I click edit
+    click_link('Edit')
+    #And change the post
+    fill_in('Your Entry', with: 'this entry is modified')
+    click_button('Update Entry')
+    #Then my post should update
+    assert_content page, 'this entry is modified'
+    click_link('My Entries')
+    assert_content page, 'this entry is modified'
+
   end
 
 

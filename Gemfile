@@ -16,6 +16,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'high_voltage'
 gem 'simple_form'
+gem 'pundit'
 
 
 group :development, :test do
