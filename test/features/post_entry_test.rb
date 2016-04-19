@@ -55,6 +55,18 @@ class PostEntryTest < Capybara::Rails::TestCase
     click_link('My Entries')
     assert_content page, 'this entry is modified'
 
+    visit root_path
+    #When I click others' entries
+    click_link('Other Entries')
+    #Then I should see a list of all entries that are not mine
+    assert_no_content page, 'this entry is modified'
+    assert_content page, 'This is a post by notlee'
+    #When I click one
+    first(:link, "View").click
+    #Then I should be brought to that post
+    assert_content page, 'This is a post by notlee'
+    assert_no_content page, 'View'
+
   end
 
 

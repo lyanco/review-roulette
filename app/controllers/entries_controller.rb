@@ -1,10 +1,16 @@
 class EntriesController < ApplicationController
   before_action :authenticate_user!
-  after_action :verify_authorized, except: :index
+  after_action :verify_authorized, except: [:index, :others]
 
   def index
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
     @entries = @user.entries.all
+  end
+
+  def others
+    @user = current_user
+    @entries = Entry.where("user_id <> #{@user.id}")
+    render 'index'
   end
 
   def show
