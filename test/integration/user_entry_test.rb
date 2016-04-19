@@ -4,6 +4,7 @@ class UserEntryTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:lee)
+    @notlee = users(:notlee)
     @entry = entries(:entry1)
     @notleeentry = entries(:entry2)
   end
@@ -65,6 +66,19 @@ class UserEntryTest < ActionDispatch::IntegrationTest
     patch entry_path(@notleeentry), entry: { content: content }
     assert_not_equal @notleeentry.content, content
 
+  end
+
+  test 'should be able to access and index others entries' do
+    login_as @user
+    get entries_path
+    assert_select 'a[href=?]', entry_path(@notleeentry), count: 0
+    get entries_path, user_id: @notlee.id
+    assert_select 'a[href=?]', entry_path(@notleeentry)
+    assert_select 'a[href=?]', entry_path(@entry), count: 0
+    assert_select 'a[href=?]', edit_entry_path(@notleeentry), count: 0
+    get entry_path(@notleeentry)
+    assert_template 'entries/show'
+    assert_match @notleeentry.content, response.body
   end
 
 

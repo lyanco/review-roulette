@@ -36,6 +36,12 @@ class EntriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should get index when logged in' do
+    sign_in @user
+    get :index
+    assert_response :success
+  end
+
   test 'should get new when logged in' do
     sign_in @user
     get :new

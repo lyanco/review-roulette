@@ -11,7 +11,8 @@ class EntryPolicy
   end
 
   def show?
-    scope.where(:id => entry.id).exists?
+    #scope.where(id: entry.id).exists?
+    true
   end
 
   def create?

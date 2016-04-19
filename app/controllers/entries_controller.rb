@@ -1,10 +1,10 @@
 class EntriesController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, except: :index
-  after_action :verify_policy_scoped, only: :index
 
   def index
-    @entries = policy_scope(Entry)
+    @user = params[:user_id] ? User.find(params[:user_id]) : current_user
+    @entries = @user.entries.all
   end
 
   def show
