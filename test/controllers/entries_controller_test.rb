@@ -34,6 +34,12 @@ class EntriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show all my entries" do
+    sign_in @user
+    get :index
+    assert_response :success
+  end
+
 
 =begin
 

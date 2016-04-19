@@ -10,6 +10,11 @@ entry1:
   created_at: <%= 10.minutes.ago %>
   user: lee
 
+entry2:
+  content: 'This is a post by notlee'
+  created_at: <%= 15.minutes.ago %>
+  user: notlee
+
 #
 #two: {}
 #  column: value

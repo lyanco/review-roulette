@@ -5,6 +5,10 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
   end
 
+  def index
+    @entries = current_user.entries.all
+  end
+
   def create
     @entry = current_user.entries.build(entry_params)
     if @entry.save
