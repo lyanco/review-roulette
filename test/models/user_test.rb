@@ -1,7 +1,4 @@
 require 'test_helper'
-include Devise::TestHelpers
-include Warden::Test::Helpers
-Warden.test_mode!
 
 class UserTest < ActiveSupport::TestCase
 

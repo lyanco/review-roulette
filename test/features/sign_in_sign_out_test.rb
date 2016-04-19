@@ -1,10 +1,11 @@
 require "test_helper"
 require "nokogiri"
-include Devise::TestHelpers
-include Warden::Test::Helpers
-Warden.test_mode!
 
 class SignInSignOutTest < Capybara::Rails::TestCase
+
+  def setup
+    logout
+  end
 
   def teardown
     Warden.test_reset!
@@ -47,5 +48,6 @@ class SignInSignOutTest < Capybara::Rails::TestCase
     #Then I should be signed in
     assert_content page, 'Signed in successfully.'
   end
+
 
 end

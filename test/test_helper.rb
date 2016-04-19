@@ -11,6 +11,10 @@ Minitest::Reporters.use!(
     Minitest.backtrace_filter
 )
 
+include Devise::TestHelpers
+include Warden::Test::Helpers
+Warden.test_mode!
+
 class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
