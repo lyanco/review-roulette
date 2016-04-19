@@ -3,6 +3,6 @@
 <% end %>
 <% if @entries.any? %>
     <ol class="entries">
-      <%= render @entries %>
+      <%= render @entries, others: false %>
     </ol>
 <% end %>

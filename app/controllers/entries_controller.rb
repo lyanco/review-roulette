@@ -8,9 +8,7 @@ class EntriesController < ApplicationController
   end
 
   def others
-    @user = current_user
-    @entries = Entry.where("user_id <> #{@user.id}")
-    render 'index'
+    @entries = Entry.where("user_id <> #{current_user.id}")
   end
 
   def show

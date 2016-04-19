@@ -41,6 +41,7 @@ class UserEntryTest < ActionDispatch::IntegrationTest
     @user.entries.each do |entry|
       assert_select 'a[href=?]', entry_path(entry)
     end
+    assert_select 'span[class="user"]', count: 0
     assert_select 'a[href=?]', entry_path(@notleeentry), count: 0
   end
 
@@ -72,16 +73,19 @@ class UserEntryTest < ActionDispatch::IntegrationTest
     login_as @user
     get entries_path
     assert_select 'a[href=?]', entry_path(@notleeentry), count: 0
+
     get entries_path, user_id: @notlee.id
     assert_select 'a[href=?]', entry_path(@notleeentry)
     assert_select 'a[href=?]', entry_path(@entry), count: 0
     assert_select 'a[href=?]', edit_entry_path(@notleeentry), count: 0
+    assert_select 'span[class="user"]', count: 0
     assert_match @notlee.email, response.body
 
     get entries_others_path
     assert_select 'a[href=?]', entry_path(@notleeentry)
     assert_select 'a[href=?]', entry_path(@entry), count: 0
     assert_select 'a[href=?]', edit_entry_path(@notleeentry), count: 0
+    assert_select 'span[class="user"]', text: @notlee.email
 
     get entry_path(@notleeentry)
     assert_template 'entries/show'
