@@ -1,3 +1,6 @@
+<% if current_user != @user %>
+    <h2>Entries for <%= @user.email %>:</h2>
+<% end %>
 <% if @entries.any? %>
     <ol class="entries">
       <%= render @entries %>
