@@ -40,7 +40,7 @@ class PostEntryTest < Capybara::Rails::TestCase
     assert_content page, 'hi this is my entry!!!'
     assert_no_content page, 'This is a post by notlee'
     #When I click an entry
-    first(:link, "View").click
+    find('a', text: 'View', match: :first).click
     #Then I should be brought to that page
     assert_content page, 'Hey whats up guys im a post'
     assert_no_content page, 'hi this is my entry!!!'
@@ -62,7 +62,7 @@ class PostEntryTest < Capybara::Rails::TestCase
     assert_no_content page, 'this entry is modified'
     assert_content page, 'This is a post by notlee'
     #When I click one
-    first(:link, "View").click
+    find('a', text: 'View', match: :first).click
     #Then I should be brought to that post
     assert_content page, 'This is a post by notlee'
     assert_no_content page, 'View'

@@ -2,3 +2,11 @@
 <% if @entry.user_id == current_user.id %>
     <%= link_to 'Edit', edit_entry_path(@entry) %>
 <% end %>
+<div class="comment_form_container">
+  <%= render 'comments/form' %>
+</div>
+<% if @comments.any? %>
+<ol class="comments">
+  <%= render @comments %>
+</ol>
+<% end %>

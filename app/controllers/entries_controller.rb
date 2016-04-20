@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
   before_action :authenticate_user!
   after_action :verify_authorized, except: [:index, :others]
+  before_action :set_entry, only: [:show, :edit, :update]
 
   def index
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
@@ -12,8 +13,9 @@ class EntriesController < ApplicationController
   end
 
   def show
-    @entry = Entry.find(params[:id])
     authorize @entry
+    @comment = @entry.comments.new
+    @comments = @entry.comments.all
   end
 
   def new
@@ -22,7 +24,6 @@ class EntriesController < ApplicationController
   end
 
   def edit
-    @entry = Entry.find(params[:id])
     authorize @entry
   end
 
@@ -38,7 +39,6 @@ class EntriesController < ApplicationController
   end
 
   def update
-    @entry = Entry.find(params[:id])
     authorize @entry
     if @entry.update_attributes(entry_params)
       flash[:success] = 'Entry updated'
@@ -50,6 +50,10 @@ class EntriesController < ApplicationController
 
 
   private
+
+    def set_entry
+      @entry = Entry.find(params[:id])
+    end
 
     def entry_params
       params.require(:entry).permit(:content)

@@ -1,0 +1,26 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+entry1comment1:
+ content: 'I am lees entrys first comment'
+ entry: entry1
+ user: notlee
+ created_at: <%= Time.zone.now %>
+
+entry1comment2:
+ content: 'I am lees entrys second comment'
+ entry: entry1
+ user: notlee
+ created_at: <%= Time.zone.now %>
+
+entry2comment1:
+ content: 'I am notlees entrys first comment'
+ entry: entry2
+ user: lee
+ created_at: <%= Time.zone.now %>
+#
+#two: {}
+#  column: value
