@@ -19,6 +19,8 @@ class SignInTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'Sign in'
     assert_select 'a', text: 'Sign up'
 
+    get page_path('about')
+
     login_as @user
     get root_path
 
