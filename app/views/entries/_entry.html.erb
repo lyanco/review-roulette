@@ -11,9 +11,9 @@
     </span>
   <% end %>
   <span class="links">
-    <%= link_to "View", entry %>
+    <%= link_to 'View', entry %>
     <% if entry.user_id == current_user.id %>
-      <%= link_to "Edit", edit_entry_path(entry) %>
+      <%= link_to 'Edit', edit_entry_path(entry) %>
     <% end %>
   </span>
 </li>

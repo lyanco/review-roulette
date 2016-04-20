@@ -90,6 +90,8 @@ class UserEntryTest < ActionDispatch::IntegrationTest
     get entry_path(@notleeentry)
     assert_template 'entries/show'
     assert_match @notleeentry.content, response.body
+    assert_no_match 'Edit', response.body
+    assert_select 'a[href=?]', edit_entry_path(@notleeentry), count: 0
 
 
   end
