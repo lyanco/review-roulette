@@ -34,5 +34,15 @@ class UserCommentTest < ActionDispatch::IntegrationTest
     assert_match 'can&#39;t be blank', response.body
   end
 
+  test 'should not be able to post comments on my own entry' do
+    login_as(@user)
+    get entry_path(@entry)
+    assert_select 'button[value="Create Comment"]', count: 0
+    content = 'I should fail because Im posting on my own entry'
+    assert_no_difference 'Comment.count' do
+      post comments_path, comment: { content: content, entry_id: @entry.id }
+    end
+  end
+
 
 end

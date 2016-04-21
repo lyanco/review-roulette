@@ -34,7 +34,7 @@ class EntriesController < ApplicationController
       flash[:success] = 'Entry created!'
       redirect_to @entry
     else
-      render current_user
+      render 'new'
     end
   end
 

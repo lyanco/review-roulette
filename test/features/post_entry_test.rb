@@ -1,6 +1,7 @@
 require "test_helper"
 require "nokogiri"
 
+
 class PostEntryTest < Capybara::Rails::TestCase
 
   def setup
@@ -13,11 +14,7 @@ class PostEntryTest < Capybara::Rails::TestCase
 
   test 'post my entry' do
     #Given I am logged in
-    visit root_path
-    click_link('Sign in')
-    fill_in('Email', with: 'lee@example.com')
-    fill_in('Password', with: 'password')
-    click_button('Log in')
+    user_logs_in
 
     #And am on the home page
     #puts page.body

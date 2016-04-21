@@ -29,6 +29,16 @@ class UserEntryTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
+  test 'should stay on the same page when it errors' do
+    login_as @user
+    get new_entry_path
+    assert_no_difference 'Entry.count' do
+      post entries_path, entry: { content: '     ' }
+    end
+    assert_template 'entries/new'
+    assert_match 'can&#39;t be blank', response.body
+  end
+
   test 'should be able to view an entry from a list' do
     login_as @user
     get root_path

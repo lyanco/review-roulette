@@ -13,11 +13,7 @@ class PostEntryTest < Capybara::Rails::TestCase
 
   test 'post and view a comment' do
     #Given I am logged in
-    visit root_path
-    click_link('Sign in')
-    fill_in('Email', with: 'lee@example.com')
-    fill_in('Password', with: 'password')
-    click_button('Log in')
+    user_logs_in
 
     #When I navigate to another persons entry
     click_link('Other Entries')
@@ -29,7 +25,12 @@ class PostEntryTest < Capybara::Rails::TestCase
     #Then I should see my comment
     assert_content page, comment
 
-
+    #When I navigate to my own entry
+    click_link('My Entries')
+    find('a', text: 'View', match: :first).click
+    #Then I should not see a form to enter comments
+    assert_no_content page, 'Your Comment'
+    assert_not page.has_button?('Create Comment')
 
   end
 

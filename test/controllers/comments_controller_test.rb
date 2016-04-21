@@ -30,5 +30,12 @@ class CommentsControllerTest < ActionController::TestCase
     assert_equal @user.id, assigns(:comment).user_id
   end
 
+  test 'should not be able to comment on my own entry' do
+    sign_in @user
+    assert_raises(Pundit::NotAuthorizedError) do
+      post :create, comment: { content: 'i am a failing comment', entry_id: @entry.id }
+    end
+  end
+
 
 end

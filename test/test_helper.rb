@@ -3,6 +3,8 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require "minitest/rails"
 require "minitest/rails/capybara"
+require 'helpers/feature_test_helper'
+
 
 require "minitest/reporters"
 Minitest::Reporters.use!(
@@ -19,6 +21,8 @@ class ActiveSupport::TestCase
   ActiveRecord::Migration.check_pending!
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
+
+  include FeatureTestHelper
 
   private
 
