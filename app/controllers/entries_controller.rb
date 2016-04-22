@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
-  before_action :authenticate_user!
-  after_action :verify_authorized, except: [:index, :others]
+  before_action :authenticate_user!, except: [:create_api]
+  after_action :verify_authorized, except: [:index, :others, :create_api]
   before_action :set_entry, only: [:show, :edit, :update]
 
   def index
@@ -38,6 +38,24 @@ class EntriesController < ApplicationController
     end
   end
 
+  def create_api
+    if call_has_valid_user_password(api_entry_params[:api_data][:user_id], api_entry_params[:api_data][:auth_token])
+      user = User.find(api_entry_params[:api_data][:user_id])
+      @entry = user.entries.build(entry_params)
+      if @entry.save
+        respond_to do |format|
+          format.json { render json: @entry }
+        end
+      else
+        format.json { render json: @entry.errors, status: :unprocessable_entity }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { error: 'user id and password do not match', status: :unprocessable_entity } }
+      end
+    end
+  end
+
   def update
     authorize @entry
     if @entry.update_attributes(entry_params)
@@ -59,4 +77,20 @@ class EntriesController < ApplicationController
       params.require(:entry).permit(:content)
     end
 
+    def api_entry_params
+      params.require(:entry).permit(:content, api_data: [:user_id, :auth_token])
+      #TODO: Refactor this to chain off of entry params to DRY it up a bit
+    end
+
+    def call_has_valid_user_password(user_id, encrypted_password)
+      user = User.find_by_id(user_id)
+      if !user_id.nil? && !encrypted_password.nil? && !user.nil?
+        User.find_by_id(user_id).encrypted_password == encrypted_password
+      else
+        return false
+      end
+    end
+
 end
+
+

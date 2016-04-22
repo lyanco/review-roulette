@@ -79,6 +79,79 @@ class EntriesControllerTest < ActionController::TestCase
     assert_not_equal 'hey', @notleeentry.content, 'User should not be able to update entries made by others'
   end
 
+  test 'should be able to create an entry by posting with my password token' do
+    assert_difference 'Entry.count', 1 do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          user_id: @user.id, auth_token: @user.encrypted_password} }, format: 'json'
+    end
+    assert_equal 'Lorem Ipsum', JSON.parse(response.body)['content']
+  end
+
+  #TODO: uncomment when there are more validations on an entry
+  #test 'should not be able to create an entry posting via JSON when entry is invalid' do
+  #  assert_difference 'Entry.count', 1 do
+  #    post :create_api, entry: { content: nil, api_data: {
+  #        user_id: @user.id, auth_token: @user.encrypted_password} }, format: 'json'
+  #  end
+  #  puts JSON.parse(response.body)
+  #end
+
+  test 'should not be able to create an entry when posting HTML with my password token' do
+    assert_raises ActionController::UnknownFormat do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          user_id: @user.id, auth_token: @user.encrypted_password} }, format: 'html'
+    end
+  end
+
+  test 'should not be able to create an entry when posting with a nil user id or pw' do
+    assert_no_difference 'Entry.count' do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          user_id: nil, auth_token: @user.encrypted_password} }, format: 'json'
+    end
+    assert_equal 'unprocessable_entity', JSON.parse(response.body)['status']
+    assert_no_difference 'Entry.count' do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          auth_token: @user.encrypted_password} }, format: 'json'
+    end
+    assert_equal 'unprocessable_entity', JSON.parse(response.body)['status']
+    assert_no_difference 'Entry.count' do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          user_id: @user.id, auth_token: nil} }, format: 'json'
+    end
+    assert_equal 'unprocessable_entity', JSON.parse(response.body)['status']
+    assert_no_difference 'Entry.count' do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          user_id: @user.id } }, format: 'json'
+    end
+    assert_equal 'unprocessable_entity', JSON.parse(response.body)['status']
+    assert_no_difference 'Entry.count' do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          } }, format: 'json'
+    end
+    assert_equal 'unprocessable_entity', JSON.parse(response.body)['status']
+    assert_no_difference 'Entry.count' do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          user_id: nil, auth_token: nil } }, format: 'json'
+    end
+    assert_equal 'unprocessable_entity', JSON.parse(response.body)['status']
+  end
+
+  test 'should not be able to create an entry when posting with an invalid password token' do
+    assert_no_difference 'Entry.count' do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          user_id: @user.id, auth_token: 'garbage' } }, format: 'json'
+    end
+    assert_equal 'unprocessable_entity', JSON.parse(response.body)['status']
+  end
+
+  test 'should not be able to create an entry when posting with a nonexistent user' do
+    assert_no_difference 'Entry.count' do
+      post :create_api, entry: { content: 'Lorem Ipsum', api_data: {
+          user_id: 0, auth_token: @user.encrypted_password } }, format: 'json'
+    end
+    assert_equal 'unprocessable_entity', JSON.parse(response.body)['status']
+  end
+
 
 =begin
 

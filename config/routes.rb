@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   get 'entries/others' => 'entries#others'
-  resources :entries
+  post 'entries/create_api' => 'entries#create_api'
+  resources :entries, except: [:destroy]
   resources :comments, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
