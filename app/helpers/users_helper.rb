@@ -1,6 +1,7 @@
 module UsersHelper
 
   def generate_bookmarklet(user)
+    #Note: bookmarklet caps at 4096 chars. this is fine for now, but may need to refactor if we wanna get fancy
     script = '(function() {
       var post_url = "http://localhost:3000/entries/create_api";
       var user_id = ' + user.id.to_s + ';
