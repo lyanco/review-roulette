@@ -2,6 +2,8 @@ class EntriesController < ApplicationController
   before_action :authenticate_user!, except: [:create_api]
   after_action :verify_authorized, except: [:index, :others, :create_api]
   before_action :set_entry, only: [:show, :edit, :update]
+  skip_before_filter :verify_authenticity_token, :only => [:create_api]
+
 
   def index
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
@@ -79,7 +81,6 @@ class EntriesController < ApplicationController
 
     def api_entry_params
       params.require(:entry).permit(:content, api_data: [:user_id, :auth_token])
-      #TODO: Refactor this to chain off of entry params to DRY it up a bit
     end
 
     def call_has_valid_user_password(user_id, encrypted_password)
