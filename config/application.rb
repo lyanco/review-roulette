@@ -29,5 +29,8 @@ module ReviewRoulette
         resource '/entries/create_api', :headers => :any, :methods => [:post]
       end
     end
+
+    config.autoload_paths += %W(#{config.root}/lib)
+
   end
 end

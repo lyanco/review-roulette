@@ -15,6 +15,7 @@ class SignInTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'Post Entry', count: 0
     assert_select 'a', text: 'My Entries', count: 0
     assert_select 'a', text: 'Other Entries', count: 0
+    assert_select 'a', text: 'Profile', count: 0
     assert_select 'a', text: 'Sign out', count: 0
     assert_select 'a', text: 'Sign in'
     assert_select 'a', text: 'Sign up'
@@ -27,6 +28,7 @@ class SignInTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'Post Entry'
     assert_select 'a', text: 'My Entries'
     assert_select 'a', text: 'Other Entries'
+    assert_select 'a', text: 'Profile'
     assert_select 'a', text: 'Sign out'
     assert_select 'a', text: 'Sign in', count: 0
     assert_select 'a', text: 'Sign up', count: 0

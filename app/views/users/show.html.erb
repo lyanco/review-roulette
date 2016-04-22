@@ -1,0 +1,6 @@
+<div>
+  <%= @user.email %>
+</div>
+<div>
+  <a id="bookmarklet" href="javascript:(<%= URI::escape(generate_bookmarklet(@user)) %>)">Remote Capture Entry</a>
+</div>

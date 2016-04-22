@@ -3,4 +3,5 @@
 <% if user_signed_in? %>
     <li><%= link_to 'My Entries', entries_path %></li>
     <li><%= link_to 'Other Entries', entries_others_path %></li>
+    <li><%= link_to 'Profile', user_path(current_user) %></li>
 <% end %>
