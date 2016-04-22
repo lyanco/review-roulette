@@ -17,6 +17,7 @@ gem 'devise'
 gem 'high_voltage'
 gem 'simple_form'
 gem 'pundit'
+gem 'rack-cors', :require => 'rack/cors'
 
 
 group :development, :test do
