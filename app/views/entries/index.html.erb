@@ -1,6 +1,11 @@
 <% if current_user != @user %>
     <h2>Entries for <%= @user.email %>:</h2>
 <% end %>
+<% if current_user == @user %>
+  <div>
+    <%= link_to "Post Entry", new_entry_path %>
+  </div>
+<% end %>
 <% if @entries.any? %>
     <ol class="entries">
       <%= render @entries, others: false %>

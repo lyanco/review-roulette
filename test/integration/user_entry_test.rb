@@ -63,6 +63,7 @@ class UserEntryTest < ActionDispatch::IntegrationTest
       assert_select 'a[href=?]', edit_entry_path(entry)
     end
     assert_select 'a[href=?]', edit_entry_path(@notleeentry), count: 0
+    assert_select 'a[href=?]', new_entry_path
 
     get entry_path(@entry)
     assert_select 'a[href=?]', edit_entry_path(@entry)
@@ -88,6 +89,7 @@ class UserEntryTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', entry_path(@notleeentry)
     assert_select 'a[href=?]', entry_path(@entry), count: 0
     assert_select 'a[href=?]', edit_entry_path(@notleeentry), count: 0
+    assert_select 'a[href=?]', new_entry_path, count: 0
     assert_select 'span[class="user"]', count: 0
     assert_match @notlee.email, response.body
 
@@ -96,6 +98,7 @@ class UserEntryTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', entry_path(@entry), count: 0
     assert_select 'a[href=?]', edit_entry_path(@notleeentry), count: 0
     assert_select 'span[class="user"]', text: @notlee.email
+    assert_select 'a[href=?]', new_entry_path, count: 0
 
     get entry_path(@notleeentry)
     assert_template 'entries/show'

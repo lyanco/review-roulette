@@ -64,6 +64,15 @@ class PostEntryTest < Capybara::Rails::TestCase
     assert_content page, 'This is a post by notlee'
     assert_no_content page, 'View'
 
+    #When I click on "My Entries"
+    click_link('My Entries')
+    #And click the Post Entry link
+    click_link('Post Entry')
+    #Then I should be taken to the new entry form
+    assert_content page, 'Your Entry*'
+    #When I go to someone else's entry page
+
+
   end
 
 
