@@ -4,15 +4,31 @@ module UsersHelper
     #Note: bookmarklet caps at 4096 chars. this is fine for now, but may need to refactor if we wanna get fancy
     #TODO: make post_url variable
     script = '(function() {
+
+      function getSelectionText() {
+          var text = "";
+          if (window.getSelection) {
+              text = window.getSelection().toString();
+          } else if (document.selection && document.selection.type != "Control") {
+              text = document.selection.createRange().text;
+          }
+          return text;
+      }
+
       var post_url = "' + root_url + 'entries/create_api";
       var user_id = ' + user.id.to_s + ';
       var encrypted_password = "' + user.encrypted_password + '";
 
-      var content = document.getElementById("outputbox").innerHTML;
+      var content = getSelectionText();
+      if (content === "") {
+          alert("Highlight text to create an entry");
+          return;
+      }
 
       var obj = {
           "entry": {
-              "content": content, "api_data": {
+              "content": content,
+              "api_data": {
                   "user_id": user_id,
                   "auth_token": encrypted_password
               }
