@@ -44,5 +44,11 @@ class UserCommentTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'should see a random entry on the home page' do
+    login_as(@user)
+    get root_url
+    #assert_match 'Give a review to', response.body
+  end
+
 
 end

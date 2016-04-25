@@ -34,5 +34,14 @@ class PostEntryTest < Capybara::Rails::TestCase
 
   end
 
+  test 'get random entry, display it, and comment on it' do
+    #Given I am logged in
+    user_logs_in
+    #When I am on the home page
+    click_link('Home')
+    #Then I should see another entry
+    #assert_content page, 'Give a review to'
+  end
+
 
 end
