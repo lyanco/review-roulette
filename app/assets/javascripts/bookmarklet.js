@@ -8,8 +8,7 @@ function getSelectionText() {
     return text;
 }
 
-function createEntry(post_url, user_id, encrypted_password) {
-    var content = getSelectionText();
+function createEntry(post_url, user_id, encrypted_password, content) {
     if (content === "") {
         alert("Highlight text to create an entry");
         return;
@@ -31,6 +30,7 @@ function createEntry(post_url, user_id, encrypted_password) {
             console.log(xmlhttp.responseText);
             alert("Posted a new entry: " + content);
         } else if (xmlhttp.readyState === 4) {
+            console.log(xmlhttp.responseText);
             alert("Failed to post new entry.");
         }
     };

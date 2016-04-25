@@ -12,7 +12,7 @@ module UsersHelper
     script = '(function() { ' +
       variables +
       File.read(Rails.root + 'app/assets/javascripts/bookmarklet.js') +
-      'createEntry(post_url, user_id, encrypted_password); ' +
+      'createEntry(post_url, user_id, encrypted_password, getSelectionText()); ' +
       '})()'
 
     script.squish
