@@ -2,8 +2,9 @@ module UsersHelper
 
   def generate_bookmarklet(user)
     #Note: bookmarklet caps at 4096 chars. this is fine for now, but may need to refactor if we wanna get fancy
+    #TODO: make post_url variable
     script = '(function() {
-      var post_url = "http://localhost:3000/entries/create_api";
+      var post_url = "' + root_url + 'entries/create_api";
       var user_id = ' + user.id.to_s + ';
       var encrypted_password = "' + user.encrypted_password + '";
 
@@ -23,7 +24,7 @@ module UsersHelper
           if (xmlhttp.readyState === 4 & xmlhttp.status === 200 && !JSON.parse(xmlhttp.responseText).status ) {
               console.log(xmlhttp.responseText);
               alert("Posted a new entry: " + content);
-          } else if (xmlhttp.readyState === 4 & xmlhttp.status !== 200) {
+          } else if (xmlhttp.readyState === 4) {
               alert("Failed to post new entry.");
           }
       };

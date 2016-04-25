@@ -49,11 +49,14 @@ class EntriesController < ApplicationController
           format.json { render json: @entry }
         end
       else
-        format.json { render json: @entry.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          #get back here when you actually have validations
+          format.json { render json: @entry.errors, status: :unprocessable_entity }
+        end
       end
     else
       respond_to do |format|
-        format.json { render json: { error: 'user id and password do not match', status: :unprocessable_entity } }
+        format.json { render json: { content: ['user id and password do not match'] } , status: :unprocessable_entity }
       end
     end
   end
