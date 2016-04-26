@@ -19,7 +19,6 @@ gem 'simple_form'
 gem 'pundit'
 gem 'rack-cors', :require => 'rack/cors'
 
-
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
@@ -28,6 +27,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'pry-rails'
   gem 'pry-rescue'
+  gem 'jasmine-rails'
 end
 
 group :development do

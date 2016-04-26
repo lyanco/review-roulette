@@ -19,9 +19,11 @@ class UserProfileTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'Remote Capture Entry'
 
     bookmarklet = Nokogiri::HTML(response.body).css('#bookmarklet')
+    string = 'var post_url = "' + root_url + 'entries/create_api";
+      var user_id = ' + @user.id.to_s + ';
+      var encrypted_password = "' + @user.encrypted_password.to_s + '";'
 
-    assert_match URI::escape('var user_id = ' + @user.id.to_s), bookmarklet.attr('href')
-    assert_match URI::escape('var encrypted_password = "' + @user.encrypted_password.to_s + '"'), bookmarklet.attr('href')
+    assert_match URI::escape(string.squish), bookmarklet.attr('href')
 
     get user_path(@notlee)
     assert_redirected_to root_url
